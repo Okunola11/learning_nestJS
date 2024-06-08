@@ -26,11 +26,26 @@ export class UsersService {
       });
     }
 
-    return this.databaseService.user.findMany();
+    return this.databaseService.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        role: true,
+      },
+    });
   }
 
   async findOne(id: number) {
     const user = await this.databaseService.user.findUnique({
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        role: true,
+      },
       where: { id },
     });
     if (!user) {
